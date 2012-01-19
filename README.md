@@ -28,7 +28,7 @@ This is a **VERY** basic raytracer, but i think it's quite clean, and could be u
 
 
 ## Example output:
-![Example output](raytracer.png)
+[![alt text](http://www.example.com/eg.png "optional image title")](http://www.example.com "optional link title")
 
 ## Resources
 * Codemind - C++ - What is ray tracing?: http://www.codermind.com/articles/Raytracer-in-C++-Introduction-What-is-ray-tracing.html
