@@ -28,7 +28,7 @@ This is a **VERY** basic raytracer, but i think it's quite clean, and could be u
 
 
 ## Example output:
-.. image:: raytracer.png
+![Example output](raytracer.png)
 
 ## Resources
 * Codemind - C++ - What is ray tracing?: http://www.codermind.com/articles/Raytracer-in-C++-Introduction-What-is-ray-tracing.html
