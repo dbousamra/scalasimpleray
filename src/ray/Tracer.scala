@@ -26,22 +26,16 @@ class Tracer() {
 
   def getObjectColor(scene: Scene, obj: Sphere, ray: Ray): Int = {
     val hitAngle = obj.intersectRay(ray)
-    computeColor(
+    var shadedColor = computeColor(
       hitAngle = hitAngle,
       ray = ray,
       sphere = obj,
       light = scene.lights(0),
       ambientLight = scene.ambientLight)
+    shadedColor
   }
 
-  def getClosestSphere(ray: Ray, spheres: List[Sphere]) = {
-    val map = new HashMap[Double, Sphere]
-    for (sphere <- spheres) {
-      val intersectPoint = sphere.intersectRay(ray)
-      map.put(intersectPoint, sphere)
-    }
-    map.minBy(_._1)._2  
-  }
+  def getClosestSphere(ray: Ray, spheres: List[Sphere]) = spheres.minBy(_.intersectRay(ray))
 
   def trace(scene: Scene, width: Int, height: Int) = {
     var screen = new Screen(width, height)

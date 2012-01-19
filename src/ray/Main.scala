@@ -16,7 +16,33 @@ object RayWindow extends SimpleSwingApplication {
 
   var width: Int = 640
   var height: Int = 480
-  val scene = new SceneParser().parseScene("scene.json")
+  val scene = Scene(
+    eye = Vector(0, 0, 0),
+    objects = List(
+      Sphere(
+        position = Vector(233, 290, 0),
+        radius = 100,
+        color = RichColor(1, 0, 0),
+        diffuse = RichColor(0.0, 0.1, 0.1)),
+      Sphere(
+        position = Vector(407, 290, 100),
+        radius = 100,
+        color = RichColor(0, 1, 0),
+        diffuse = RichColor(0.1, 0.0, 0.1)),
+      Sphere(
+        position = Vector(320, 140, 0),
+        radius = 100,
+        color = RichColor(0, 0, 1),
+        diffuse = RichColor(0.0, 0.0, 0.1))),
+    lights = List(
+      Light(
+        position = Vector(-400, 400, 0),
+        color = RichColor(0.7, 0.7, 0.7))),
+    ambientLight = Light(
+      position = Vector(0, 0, 0),
+      color = RichColor(0.3, 0.3, 0.3)))
+  println(new SceneParser().generateScene(scene))
+
   val pixels = new Tracer().trace(scene, width, height)
 
   def top = new MainFrame {

@@ -35,7 +35,7 @@ case class Vector(x: Double, y: Double, z: Double) {
   def norm = this / length
 }
 
-case class Sphere(position: Vector, radius: Int, color: RichColor) {
+case class Sphere(position: Vector, radius: Int, color: RichColor, diffuse: RichColor) {
 
   def intersectRay(ray: Ray): Double = {
     val v = position - ray.position
