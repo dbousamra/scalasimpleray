@@ -1,6 +1,13 @@
 package ray
 
-case class Scene(eye: Vector, objects: List[Sphere], lights: List[Light])
+case class RichColor(red: Double, green: Double, blue: Double) {
+    def *(c : RichColor) = RichColor(red * c.red, green * c.green, blue * c.blue)
+    def *(v : Double) = RichColor(red * v, green * v, blue * v)
+    def +(c : RichColor) = RichColor(red + c.red, green + c.green, blue + c.blue)
+    def toInt : Int = ((red * 255).toInt << 16) | ((green * 255).toInt << 8) | (blue * 255).toInt
+  }
+
+case class Scene(eye: Vector, objects: List[Sphere], lights: List[Light], ambientLight: Light) 
 
 case class Ray(position: Vector, direction: Vector) {
   def *(v: Double) = position + direction * v
@@ -25,10 +32,10 @@ case class Vector(x: Double, y: Double, z: Double) {
 
   def lengthSquared = this *+ this
   def length = Math.sqrt(lengthSquared)
-  def normalized = this / length
+  def norm = this / length
 }
 
-case class Sphere(position: Vector, radius: Int) {
+case class Sphere(position: Vector, radius: Int, color: RichColor) {
 
   def intersectRay(ray: Ray): Double = {
     val v = position - ray.position
@@ -39,4 +46,4 @@ case class Sphere(position: Vector, radius: Int) {
   }
 }
 
-case class Light(position: Vector)
+case class Light(position: Vector, color: RichColor)
