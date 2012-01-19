@@ -28,7 +28,7 @@ This is a **VERY** basic raytracer, but i think it's quite clean, and could be u
 
 
 ## Example output:
-![Flowers](/raytracer.png)
+![Flowers](https://github.com/dbousamra/scalaray/blob/master/raytracer.png?raw=true)
 
 ## Resources
 * Codemind - C++ - What is ray tracing?: http://www.codermind.com/articles/Raytracer-in-C++-Introduction-What-is-ray-tracing.html
