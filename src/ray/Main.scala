@@ -14,8 +14,8 @@ object RayWindow extends SimpleSwingApplication {
   private var c: java.awt.Color = new java.awt.Color(0)
   private val frameTitle = "scalaray"
 
-  var width: Int = 320
-  var height: Int = 240
+  var width: Int = 640
+  var height: Int = 480
   val scene = new SceneParser().parseScene("scene.json")
   val pixels = new Tracer().trace(scene, width, height)
 

@@ -3,10 +3,9 @@ import java.awt.Color
 import java.awt.image.BufferedImage
 import javax.imageio.ImageIO
 import java.io.File
+import scala.collection.mutable.HashMap
 
 class Tracer() {
-
-  val BACKGROUND = 0;
 
   class Screen(x: Int, y: Int) {
     val s = Array.ofDim[java.awt.Color](x, y)
@@ -25,15 +24,23 @@ class Tracer() {
     }
   }
 
-  def renderObject(width: Int, height: Int, x: Int, y: Int, scene: Scene) = {
-    val ray = Ray(Vector(0, 0, 0), Vector(x - width / 2, height / 2 - y, width).norm)
-    val hitAngle = scene.objects(0).intersectRay(ray)
+  def getObjectColor(scene: Scene, obj: Sphere, ray: Ray): Int = {
+    val hitAngle = obj.intersectRay(ray)
     computeColor(
       hitAngle = hitAngle,
       ray = ray,
-      sphere = scene.objects(0),
+      sphere = obj,
       light = scene.lights(0),
       ambientLight = scene.ambientLight)
+  }
+
+  def getClosestSphere(ray: Ray, spheres: List[Sphere]) = {
+    val map = new HashMap[Double, Sphere]
+    for (sphere <- spheres) {
+      val intersectPoint = sphere.intersectRay(ray)
+      map.put(intersectPoint, sphere)
+    }
+    map.minBy(_._1)._2  
   }
 
   def trace(scene: Scene, width: Int, height: Int) = {
@@ -42,7 +49,9 @@ class Tracer() {
       x <- screen.s.indices
       y <- screen.s(x).indices
     } {
-      val finalColor = renderObject(width, height, x, y, scene)
+      val ray = Ray(Vector(x, y, -1000), Vector(0, 0, 1).norm)
+      val closestSphere = getClosestSphere(ray, scene.objects)
+      val finalColor = getObjectColor(scene, closestSphere, ray)
       screen.s(x)(y) = new Color(finalColor)
     }
     screen
