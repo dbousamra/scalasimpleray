@@ -13,18 +13,19 @@ import scala.util.Random
 object RayWindow extends SimpleSwingApplication {
   private val frameTitle = "scalaray"
 
-  var width: Int = 640
-  var height: Int = 480
+  var width: Int = 100
+  var height: Int = 100
   val scene = new SceneParser().parseScene("scene.json")
 
-  val pixels = new Tracer().trace(scene, width, height)
+  var distance = -1500
+  var pixels = new Tracer().trace(scene, width, height, -10000)
 
   def top = new MainFrame {
     title = frameTitle
     contents = p
   }
 
-  val p = new Panel {
+  val p = new Panel with ActionListener {
     preferredSize = new Dimension(width, height)
 
     override def paintComponent(g: Graphics2D) {
@@ -38,5 +39,13 @@ object RayWindow extends SimpleSwingApplication {
         g.fillRect(x, y, x, y)
       }
     }
+    def actionPerformed(e: ActionEvent) {
+      repaint
+      pixels = new Tracer().trace(scene, width, height, distance)
+      distance +=40
+      println(distance)
+    }
   }
+  val timer = new Timer(1, p) //can control timing from here.
+  timer.start()
 }

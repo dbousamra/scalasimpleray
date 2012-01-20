@@ -37,13 +37,13 @@ class Tracer() {
 
   def getClosestSphere(ray: Ray, spheres: List[Sphere]) = spheres.minBy(_.intersectRay(ray))
 
-  def trace(scene: Scene, width: Int, height: Int) = {
+  def trace(scene: Scene, width: Int, height: Int, distance: Double) = {
     var screen = new Screen(width, height)
     for {
       x <- screen.s.indices
       y <- screen.s(x).indices
     } {
-      val ray = Ray(Vector(x, y, -1000), Vector(0, 0, 1).norm)
+      val ray = Ray(Vector(250, 250, distance), Vector(x- width / 2, height / 2 - y, width).norm)
       val closestSphere = getClosestSphere(ray, scene.objects)
       val finalColor = getObjectColor(scene, closestSphere, ray)
       screen.s(x)(y) = new Color(finalColor)
