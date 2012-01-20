@@ -1,4 +1,4 @@
-package ray
+package main.scala
 
 case class RichColor(red: Double, green: Double, blue: Double) {
     def *(c : RichColor) = RichColor(red * c.red, green * c.green, blue * c.blue)

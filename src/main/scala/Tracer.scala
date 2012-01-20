@@ -1,4 +1,4 @@
-package ray
+package main.scala
 import java.awt.Color
 import java.awt.image.BufferedImage
 import javax.imageio.ImageIO
