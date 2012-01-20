@@ -15,10 +15,11 @@ case class Ray(position: Vector, direction: Vector) {
 
 case class Vector(x: Double, y: Double, z: Double) {
 
-  def +(v: Vector) = Vector(x + v.x, y + v.y, z + v.z)
-  def -(v: Vector) = Vector(x - v.x, y - v.y, z - v.z)
-  def *(v: Vector) = Vector(x * v.x, y * v.y, z * v.z)
-  def /(v: Vector) = Vector(x / v.x, y / v.y, z / v.z)
+  def op(f:(Double, Double) => Double) = (v: Vector) => Vector(f(x, v.x), f(y, v.y), f(z, v.z))
+  def + = op(_ + _)
+  def - = op(_ - _)
+  def * = op(_ * _)
+  def / = op(_ / _)
 
   def *(v: Double) = Vector(x * v, y * v, z * v)
   def /(v: Double) = Vector(x / v, y / v, z / v)
