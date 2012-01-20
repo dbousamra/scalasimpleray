@@ -1,4 +1,4 @@
-package ray
+package main.scala
 import scala.io.Source
 import com.codahale.jerkson.Json._
 import java.awt.Color
