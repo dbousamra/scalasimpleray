@@ -1,4 +1,4 @@
-package main.scala
+package ray
 
 import swing.{ Panel, MainFrame, SimpleSwingApplication }
 import java.awt.{ Color, Graphics2D, Dimension }
